@@ -6,6 +6,24 @@
 >
 > **Note**: This is an independent, community-developed tool and is not affiliated with, endorsed by, or connected to Microsoft Corporation in any way.
 
+## Table of Contents
+
+- [What is this?](#what-is-this)
+- [Key Features](#key-features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+  - [Option 1: Claude Desktop with .mcpb Package (Recommended)](#option-1-claude-desktop-with-mcpb-package-recommended)
+  - [Option 2: Claude Desktop with .exe (Manual Configuration)](#option-2-claude-desktop-with-exe-manual-configuration)
+  - [Option 3: Claude Code with .exe](#option-3-claude-code-with-exe)
+- [Getting Started](#getting-started)
+- [Available Tools (v1.3.0)](#available-tools-v130)
+- [Example Use Cases](#example-use-cases)
+- [Troubleshooting](#troubleshooting)
+- [Security & Privacy](#security--privacy)
+- [Limitations](#limitations)
+- [Support](#support)
+- [Author & License](#author--license)
+
 ## What is this?
 
 The Power BI Desktop MCP Server is a tool that lets AI assistants like Claude interact with your Power BI models programmatically. It enables Claude to read your model structure, run DAX queries, create and modify measures, manage relationships, and perform advanced analytics - all through natural conversation.
@@ -386,9 +404,31 @@ For issues, questions, or feature requests:
 
 **Developed by**: Maxim Anatsko
 **Website**: [maxanatsko.com](https://maxanatsko.com)
-**Copyright**: © Maxim Anatsko, WarpBI
+**Copyright**: © 2025 Maxim Anatsko, WarpBI. All rights reserved.
 
-**Disclaimer**: This software is an independent, community-developed tool and is not affiliated with, endorsed by, or connected to Microsoft Corporation. Power BI and Analysis Services are trademarks of Microsoft Corporation.
+### License Terms
+
+This software is proprietary and confidential. By downloading, installing, or using the Power BI Desktop MCP Server, you agree to the following terms:
+
+**Permitted Use:**
+- Personal and commercial use of the software as provided
+- Connection to Power BI Desktop for model management and analysis
+- Integration with Claude Desktop and Claude Code applications
+
+**Restrictions:**
+- You may not modify, reverse engineer, decompile, or disassemble the software
+- You may not redistribute, sublicense, rent, lease, or sell the software
+- You may not remove or alter any copyright notices or proprietary markings
+- Source code is not provided and may not be derived from the binary
+
+**Warranty Disclaimer:**
+THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. THE AUTHOR MAKES NO REPRESENTATIONS OR WARRANTIES ABOUT THE ACCURACY, RELIABILITY, COMPLETENESS, OR TIMELINESS OF THE SOFTWARE OR ITS RESULTS.
+
+**Limitation of Liability:**
+IN NO EVENT SHALL MAXIM ANATSKO, WARPBI, OR ANY CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+**Microsoft Disclaimer:**
+This software is an independent, community-developed tool and is not affiliated with, endorsed by, or connected to Microsoft Corporation. Power BI, Analysis Services, and other Microsoft product names are trademarks of Microsoft Corporation.
 
 ## Acknowledgments
 
