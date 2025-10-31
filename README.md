@@ -465,5 +465,5 @@ Built with:
 
 **Version**: 1.3.0
 **MCP Protocol**: 2025-06-18
-**Release Date**: October 2024
+**Release Date**: October 2025
 **Platform**: Windows 10/11
