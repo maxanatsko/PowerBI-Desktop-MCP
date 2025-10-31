@@ -9,6 +9,7 @@
 ## Table of Contents
 
 - [What is this?](#what-is-this)
+- [Privacy & Data](#privacy--data)
 - [Key Features](#key-features)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
@@ -29,6 +30,29 @@
 The Power BI Desktop MCP Server is a tool that lets AI assistants like Claude interact with your Power BI models programmatically. It enables Claude to read your model structure, run DAX queries, create and modify measures, manage relationships, and perform advanced analytics - all through natural conversation.
 
 Think of it as giving Claude "eyes and hands" to work with your Power BI models, allowing you to automate tasks, analyze data, and build solutions using AI assistance.
+
+## Privacy & Data
+
+### No Data Collection or Tracking
+
+**This MCP server does NOT collect, track, or store any data.**
+
+- No telemetry is sent to external servers
+- No analytics or usage data is tracked
+- No personal or model data is logged
+- Your Power BI model data is never uploaded anywhere
+
+**Data Flow:**
+The ONLY data that passes through this MCP server flows between:
+1. **Your Power BI Desktop** → MCP Server (reads model structure, executes queries)
+2. **MCP Server** → **Your chosen LLM** (Claude Desktop or Claude Code)
+
+All communication is local to your machine. The MCP server acts as a bridge between Power BI Desktop and your AI assistant - nothing more.
+
+**Your responsibility:**
+- Be aware of what data you ask Claude to access in your Power BI model
+- Remember that Claude may store your conversations according to Anthropic's privacy policy (for Claude Desktop/Claude Code users, consult their respective privacy policies)
+- The MCP itself does not retain any data between requests
 
 ## Key Features
 
