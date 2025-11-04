@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/maxanatsko-powerbi-desktop-mcp-badge.png)](https://mseep.ai/app/maxanatsko-powerbi-desktop-mcp)
+
 # Power BI Desktop MCP Server
 
 **Version 1.3.0** - Model Context Protocol Server for Power BI Desktop
