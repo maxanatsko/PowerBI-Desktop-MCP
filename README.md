@@ -6,6 +6,8 @@
 >
 > **Note**: This is an independent, community-developed tool and is not affiliated with, endorsed by, or connected to Microsoft Corporation in any way.
 
+[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="175" alt="Buy Me a Coffee">](https://buymeacoffee.com/rRVivpcqeW)
+
 ## Table of Contents
 
 - [What is this?](#what-is-this)
