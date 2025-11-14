@@ -2,6 +2,8 @@
 
 **Version 2.0.9** - Model Context Protocol Server for Power BI Desktop
 
+Compatible with: **Claude Desktop** • **Claude Code** • **VS Code (GitHub Copilot)** • Other MCP-compatible AI tools
+
 > **Developed by Maxim Anatsko** | [maxanatsko.com](https://maxanatsko.com)
 >
 > **Note**: This is an independent, community-developed tool and is not affiliated with, endorsed by, or connected to Microsoft Corporation in any way.
@@ -27,6 +29,7 @@ Choose the read-only version if you want to explore and analyze your models with
   - [Option 1: Claude Desktop with .mcpb Package (Recommended)](#option-1-claude-desktop-with-mcpb-package-recommended)
   - [Option 2: Claude Desktop with .exe (Manual Configuration)](#option-2-claude-desktop-with-exe-manual-configuration)
   - [Option 3: Claude Code with .exe](#option-3-claude-code-with-exe)
+  - [Option 4: VS Code with Native MCP Support](#option-4-vs-code-with-native-mcp-support)
 - [Getting Started](#getting-started)
 - [Available Tools](#available-tools)
 - [Example Use Cases](#example-use-cases)
@@ -38,9 +41,9 @@ Choose the read-only version if you want to explore and analyze your models with
 
 ## What is this?
 
-The Power BI Desktop MCP Server is a tool that lets AI assistants like Claude interact with your Power BI models programmatically. It enables Claude to read your model structure, run DAX queries, create and modify measures, manage relationships, and perform advanced analytics - all through natural conversation.
+The Power BI Desktop MCP Server is a tool that lets AI assistants like Claude, GitHub Copilot, and other MCP-compatible AI tools interact with your Power BI models programmatically. It enables AI to read your model structure, run DAX queries, create and modify measures, manage relationships, and perform advanced analytics - all through natural conversation.
 
-Think of it as giving Claude "eyes and hands" to work with your Power BI models, allowing you to automate tasks, analyze data, and build solutions using AI assistance.
+Think of it as giving AI "eyes and hands" to work with your Power BI models, allowing you to automate tasks, analyze data, and build solutions using AI assistance.
 
 ## Privacy & Data
 
@@ -56,14 +59,16 @@ Think of it as giving Claude "eyes and hands" to work with your Power BI models,
 **Data Flow:**
 The ONLY data that passes through this MCP server flows between:
 1. **Your Power BI Desktop** → MCP Server (reads model structure, executes queries)
-2. **MCP Server** → **Your chosen LLM** (Claude Desktop or Claude Code)
+2. **MCP Server** → **Your chosen AI assistant** (Claude Desktop, Claude Code, VS Code with GitHub Copilot, or other MCP-compatible tools)
 
 All communication is local to your machine. The MCP server acts as a bridge between Power BI Desktop and your AI assistant - nothing more.
 
 **Your responsibility:**
-- Be aware of what data you ask Claude to access in your Power BI model
-- Remember that Claude may store your conversations according to Anthropic's privacy policy (for Claude Desktop/Claude Code users, consult their respective privacy policies)
-- The MCP itself does not retain any data between requests
+- Be aware of what data you ask the AI to access in your Power BI model
+- Remember that your chosen AI assistant may store conversations according to their privacy policies:
+  - Claude Desktop/Claude Code: Anthropic's privacy policy
+  - VS Code with GitHub Copilot: Microsoft/GitHub privacy policies
+- The MCP server itself does not retain any data between requests
 
 ## Key Features
 
@@ -152,7 +157,10 @@ Before installing, make sure you have:
 
 1. **Windows 10/11** (Windows-only application)
 2. **Power BI Desktop** installed ([Download MSI](https://www.microsoft.com/en-us/download/details.aspx?id=58494) or from Microsoft Store)
-3. **Claude Desktop** or **Claude Code** application installed
+3. One of the following AI assistants:
+   - **Claude Desktop** (recommended for .mcpb package installation)
+   - **Claude Code** (CLI-based coding environment)
+   - **VS Code** with GitHub Copilot (requires VS Code 1.102+)
 
 Note: The `.exe` and `.mcpb` packages are self-contained and include all necessary runtime components. You do not need to install .NET separately.
 
@@ -256,6 +264,40 @@ claude mcp add --transport stdio powerbi-desktop-readonly -- "C:\Program Files\P
 
 The server will be available in all conversations. You can verify it's running by checking for MCP server indicators in the UI.
 
+### Option 4: VS Code with Native MCP Support (Windows)
+
+VS Code has native MCP support starting with version 1.102+. Requires GitHub Copilot.
+
+**Note**: This server only works on Windows as it requires Power BI Desktop.
+
+1. **Download the executable**:
+   - **Full version**: `powerbi-desktop-mcp-2.0.9.exe`
+   - **Read-only version**: `powerbi-desktop-mcp-readonly-2.0.9.exe`
+
+2. **Place in a permanent location**: Example: `C:\Program Files\PowerBI-MCP\powerbi-desktop-mcp-2.0.9.exe`
+
+3. **Create `.vscode/mcp.json` in your workspace**:
+
+   ```json
+   {
+     "servers": {
+       "powerbi-desktop": {
+         "type": "stdio",
+         "command": "C:\\Program Files\\PowerBI-MCP\\powerbi-desktop-mcp-2.0.9.exe",
+         "args": []
+       }
+     }
+   }
+   ```
+
+   **Tip**: Use Command Palette → "MCP: Add Server" → Select "Global" for all workspaces
+
+4. **Restart VS Code**
+
+5. **Enable agent mode**: In Copilot Chat, click the **Tools** button to enable MCP tools
+
+See [VS Code MCP documentation](https://code.visualstudio.com/docs/copilot/chat/mcp-servers) for more details.
+
 ## Getting Started
 
 ### 1. Start Power BI Desktop
@@ -264,21 +306,23 @@ Open Power BI Desktop and load a `.pbix` file that you want to work with. The MC
 
 ### 2. Start Your AI Assistant
 
-Launch Claude Desktop or Claude Code. The Power BI MCP Server will start automatically in the background.
+Launch your chosen AI assistant:
+- **Claude Desktop** or **Claude Code**: The Power BI MCP Server will start automatically in the background
+- **VS Code with GitHub Copilot**: Open VS Code with your configured workspace, and the MCP server will be available in Copilot Chat (enable agent mode via the Tools button)
 
 ### 3. List Available Models
 
-If you have multiple Power BI files open, ask Claude:
+If you have multiple Power BI files open, ask your AI assistant:
 
 ```
 "List my available Power BI models"
 ```
 
-Claude will call `manage_model_connection` with `operation="list"` to show all running instances.
+The AI will call `manage_model_connection` with `operation="list"` to show all running instances.
 
 ### 4. Select a Model
 
-Tell Claude which model to connect to:
+Tell the AI which model to connect to:
 
 ```
 "Connect to model 1" or "Connect to [model name]"
@@ -549,20 +593,27 @@ What you’ll see:
 3. Check you have write permissions to the Claude Desktop extensions folder
 4. Try Option 2 (manual .exe configuration) instead
 
-### "Tools not showing up in Claude"
+### "Tools not showing up"
 
-**Solution:**
-1. Restart Claude Desktop or Claude Code completely (not just close the window)
+**For Claude Desktop/Code:**
+1. Restart the application completely (not just close the window)
 2. Check the MCP server is running (look for PbiMcp.exe in Task Manager)
-3. Review the Claude logs for error messages
+3. Review the logs for error messages
 4. Verify the configuration file syntax is correct (no missing commas or brackets)
+
+**For VS Code:**
+1. Check Output panel (View → Output, select "MCP Servers") for errors
+2. Verify the path in `.vscode/mcp.json` uses escaped backslashes (`\\`)
+3. Enable agent mode in Copilot Chat (click **Tools** button)
+4. Restart VS Code completely
 
 ## Security & Privacy
 
 - **Local-only**: The MCP server runs entirely on your local machine. No data is sent to external servers.
-- **Read & Write Access**: The server can both read from and write to your Power BI models. Be cautious when Claude suggests changes.
+- **Read & Write Access**: The server can both read from and write to your Power BI models. Be cautious when the AI suggests changes (consider using the read-only version for exploration).
 - **Connection Security**: Uses local Analysis Services connections (same as Power BI Desktop itself)
-- **No Credentials**: No passwords or connection strings are exposed to Claude
+- **No Credentials**: No passwords or connection strings are exposed to the AI assistant
+- **Trust Verification**: Always review server configuration before trusting it in your environment (both Claude and VS Code will prompt for confirmation)
 
 ## Limitations
 
@@ -616,6 +667,11 @@ Built with:
 - Microsoft Analysis Services Tabular API
 - .NET 8.0
 
+Compatible with:
+- Claude Desktop and Claude Code (Anthropic)
+- VS Code with GitHub Copilot (Microsoft)
+- Other MCP-compatible AI assistants
+
 ---
 
 **Version**: 2.0.9
@@ -623,3 +679,4 @@ Built with:
 **Release Date**: November 2025
 **Platform**: Windows 10/11
 **Versions**: Full (26 tools) and Read-Only (9 tools - view and analyze only)
+**Compatible AI Tools**: Claude Desktop, Claude Code, VS Code (with GitHub Copilot 1.102+), and other MCP-compatible assistants
