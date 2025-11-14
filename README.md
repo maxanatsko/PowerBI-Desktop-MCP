@@ -1,12 +1,21 @@
 # Power BI Desktop MCP Server
 
-**Version 1.3.0** - Model Context Protocol Server for Power BI Desktop
+**Version 2.0.9** - Model Context Protocol Server for Power BI Desktop
 
 > **Developed by Maxim Anatsko** | [maxanatsko.com](https://maxanatsko.com)
 >
 > **Note**: This is an independent, community-developed tool and is not affiliated with, endorsed by, or connected to Microsoft Corporation in any way.
 
 [<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="175" alt="Buy Me a Coffee">](https://buymeacoffee.com/rRVivpcqeW)
+
+## Available Versions
+
+This MCP server comes in two versions:
+
+- **Full Version** (`powerbi-desktop-mcp`) - Complete access with all 26 tools including the ability to create, update, and delete model objects
+- **Read-Only Version** (`powerbi-desktop-mcp-readonly`) - Safe exploration with 9 read and analysis tools only. Cannot modify your Power BI models.
+
+Choose the read-only version if you want to explore and analyze your models without any risk of making changes.
 
 ## Table of Contents
 
@@ -19,7 +28,7 @@
   - [Option 2: Claude Desktop with .exe (Manual Configuration)](#option-2-claude-desktop-with-exe-manual-configuration)
   - [Option 3: Claude Code with .exe](#option-3-claude-code-with-exe)
 - [Getting Started](#getting-started)
-- [Available Tools (v1.3.0)](#available-tools-v130)
+- [Available Tools](#available-tools)
 - [Example Use Cases](#example-use-cases)
 - [Troubleshooting](#troubleshooting)
 - [Security & Privacy](#security--privacy)
@@ -58,46 +67,84 @@ All communication is local to your machine. The MCP server acts as a bridge betw
 
 ## Key Features
 
-### 🎯 25 Powerful Tools for Power BI Model Operations
+### 🎯 26 Powerful Tools for Power BI Model Operations
 
 **Model Management**
 - Auto-discover and connect to running Power BI Desktop instances
 - List available models and select which one to work with
 - Get current connection status
+- Manage model properties (descriptions, cultures, annotations)
 
-**Data Exploration**
-- List and describe tables, columns, and measures
-- Preview table data
-- Export complete model schema
-- Execute DAX queries
-- Get column statistics and distinct values
+**Data Exploration & Analysis**
+- List and describe tables, columns, measures, and hierarchies
+- Preview table data with configurable row limits
+- Export complete model schema as JSON
+- Execute DAX queries with results up to 1000 rows
+- Get column statistics (min, max, null count, distinct values)
+- Query performance analysis with Storage Engine and Formula Engine metrics
+
+**Table Operations**
+- Create new tables with multiple partition types
+- Update table properties and structures
+- Delete tables from the model
+- Mark tables as date tables for time intelligence
 
 **Measure Management**
-- Create new DAX measures with formatting and organization
-- Update existing measures
+- Create new DAX measures with dynamic format string expressions
+- Update existing measures including name and expression
 - Delete measures
-- Create dedicated measures tables
+- Format strings with static or dynamic expressions
+- Display folder organization
 
 **Relationship Operations**
-- List all relationships with properties
-- Create new relationships with full control over cardinality and cross-filter direction
-- Update relationship properties
+- List all relationships with cardinality and cross-filter direction
+- Create new relationships with full control
+- Update relationship properties (active status, direction, cardinality)
 - Delete relationships
 
-**Search & Discovery**
-- Search for objects by name pattern (tables, columns, measures)
-- Full-text search across DAX and M expressions
-- Find calculated columns
+**Partition Management** (Unified for all partition types)
+- Create and manage M (Power Query), Query (SQL), Calculated (DAX), and Entity (Dataflow) partitions
+- Support for Import, DirectQuery, and Dual storage modes
+- Partition refresh at granular level
+- View partition expressions and configurations
 
-**Advanced Analytics**
-- Query performance analysis with execution metrics
-- VertiPaq statistics for storage optimization
-- Column cardinality and compression information
+**Advanced Model Features**
+- **User-Defined Functions (UDFs)**: Create, update, delete custom DAX functions with parameters
+- **Calculation Groups**: Create calculation groups with dynamic calculation items
+- **Hierarchies**: Manage hierarchies with multiple levels and ordering
+- **KPIs**: Create Key Performance Indicators with target, status, and trend expressions
+- **Roles & Security**: Manage security roles with row-level and object-level security (RLS/OLS)
+- **Perspectives**: Create perspectives to filter model objects for different user groups
+- **Calendars**: Configure time intelligence calendars with multiple time units
+
+**Multi-Language Support**
+- Cultures: Add languages/locales to your model
+- Translations: Translate table/column/measure names and descriptions
+- Support for 40+ culture codes (en-US, fr-FR, de-DE, es-ES, zh-CN, etc.)
 
 **Data Source Management**
-- List data sources
-- View partition information
+- List data sources and their configuration
+- View partition information by type and storage mode
 - Analyze M partition expressions
+- Get data source details and connections
+
+**Search & Discovery**
+- Search for objects by name pattern (tables, columns, measures, calculated columns)
+- Full-text search across DAX and M expressions
+- Case-sensitive or case-insensitive search modes
+- Find calculated columns with expressions
+
+**Storage & Performance Optimization**
+- VertiPaq statistics including dictionary size, data size, encoding
+- Column cardinality analysis
+- Compression ratio evaluation
+- Storage mode analysis (Import vs DirectQuery)
+
+**Refresh Operations**
+- Refresh individual table partitions
+- Refresh entire tables
+- Full model refresh
+- Metadata refresh for UDFs and calculations
 
 ## Prerequisites
 
@@ -111,13 +158,15 @@ Note: The `.exe` and `.mcpb` packages are self-contained and include all necessa
 
 ## Installation
 
-You can install the Power BI MCP Server in three ways:
+You can install the Power BI MCP Server in three ways. Each method works for both the **full version** and the **read-only version** - simply use the corresponding package or executable file for your preferred version.
 
 ### Option 1: Claude Desktop with .mcpb Package (Recommended)
 
 The `.mcpb` package is the easiest way to install - it's a self-contained extension specifically for Claude Desktop.
 
-1. **Download the package**: Get `powerbi-desktop-mcp-1.3.0.mcpb` from the releases
+1. **Download the package**:
+   - **Full version**: `powerbi-desktop-mcp-2.0.9.mcpb` (all tools including create/update/delete)
+   - **Read-only version**: `powerbi-desktop-mcp-readonly-2.0.9.mcpb` (view and analyze only)
 
 2. **Install the extension**:
    - **Simple method**: Double-click the `.mcpb` file. Claude Desktop will open and show the installation dialog.
@@ -126,7 +175,7 @@ The `.mcpb` package is the easiest way to install - it's a self-contained extens
      - Go to Settings (gear icon) → Extensions
      - Click "Advanced settings" → "Extension Developer" section
      - Click "Install Extension..."
-     - Select the downloaded `powerbi-desktop-mcp-1.3.0.mcpb` file
+     - Select the downloaded `.mcpb` file (full or read-only version)
      - Click "Install" in the dialog
 
 3. **Restart Claude Desktop**: Completely quit and restart the application (not just close the window)
@@ -137,9 +186,11 @@ The server will be automatically configured and ready to use. You'll see an MCP 
 
 If you prefer manual configuration or need more control:
 
-1. **Download the executable**: Get `PbiMcp.exe` from the releases
+1. **Download the executable**:
+   - **Full version**: `powerbi-desktop-mcp-2.0.9.exe` (all tools)
+   - **Read-only version**: `powerbi-desktop-mcp-readonly-2.0.9.exe` (view and analyze only)
 
-2. **Place in a permanent location**: For example, `C:\Program Files\PowerBI-MCP\PbiMcp.exe`
+2. **Place in a permanent location**: For example, `C:\Program Files\PowerBI-MCP\powerbi-desktop-mcp-2.0.9.exe` (or the read-only version)
 
 3. **Edit the configuration file**:
    - Open Claude Desktop
@@ -156,7 +207,7 @@ If you prefer manual configuration or need more control:
 {
   "mcpServers": {
     "powerbi-desktop": {
-      "command": "C:\\Program Files\\PowerBI-MCP\\PbiMcp.exe",
+      "command": "C:\\Program Files\\PowerBI-MCP\\powerbi-desktop-mcp-2.0.9.exe",
       "args": []
     }
   }
@@ -173,16 +224,22 @@ After restart, you'll see an MCP indicator in the bottom-right corner of the con
 
 For Claude Code (the coding environment):
 
-1. **Download the executable**: Get `PbiMcp.exe` from the releases
+1. **Download the executable**:
+   - **Full version**: `powerbi-desktop-mcp-2.0.9.exe` (all tools)
+   - **Read-only version**: `powerbi-desktop-mcp-readonly-2.0.9.exe` (view and analyze only)
 
-2. **Place in a permanent location**: For example, `C:\Program Files\PowerBI-MCP\PbiMcp.exe`
+2. **Place in a permanent location**: For example, `C:\Program Files\PowerBI-MCP\powerbi-desktop-mcp-2.0.9.exe` (or the read-only version)
 
 3. **Add the MCP server using the command line**:
 
    Open Claude Code and use the built-in terminal or command palette:
 
 ```bash
-claude mcp add --transport stdio powerbi-desktop -- "C:\Program Files\PowerBI-MCP\PbiMcp.exe"
+# Full version
+claude mcp add --transport stdio powerbi-desktop -- "C:\Program Files\PowerBI-MCP\powerbi-desktop-mcp-2.0.9.exe"
+
+# Or read-only version
+claude mcp add --transport stdio powerbi-desktop-readonly -- "C:\Program Files\PowerBI-MCP\powerbi-desktop-mcp-readonly-2.0.9.exe"
 ```
 
    This command will:
@@ -217,7 +274,7 @@ If you have multiple Power BI files open, ask Claude:
 "List my available Power BI models"
 ```
 
-Claude will use the `list_available_models` tool to show you all running instances.
+Claude will call `manage_model_connection` with `operation="list"` to show all running instances.
 
 ### 4. Select a Model
 
@@ -271,46 +328,88 @@ Now you can interact with your Power BI model naturally:
 "Analyze the performance of this DAX query"
 ```
 
-## Available Tools (v1.3.0)
+## Available Tools
 
-### Model Management (3 tools)
-- `list_available_models` - Discover all running Power BI instances
-- `select_model` - Connect to a specific model by ID or index
-- `get_current_model` - Get info about currently connected model
+### Model Management (1 unified tool)
+- `manage_model_connection` - Discover, select, and manage Power BI model connections
+  - `operation="list"` - List all running Power BI instances
+  - `operation="select"` - Connect to a specific model
+  - `operation="get_current"` - Get current connection info
 
-### Table Operations (6 tools)
-- `list_tables` - List all tables
-- `describe_table` - Get detailed table structure
-- `preview_table_data` - Preview rows from a table
-- `list_measures` - List all measures (with optional table filter)
-- `export_model_schema` - Export complete schema as JSON
-- `run_dax` - Execute DAX queries
+### Model Properties (1 tool)
+- `manage_model_properties` - Get and update global model properties, descriptions, cultures, annotations
 
-### Column Operations (4 tools)
-- `list_columns` - List columns with types and formats
-- `get_column_values` - Sample distinct values from a column
-- `get_column_summary` - Get statistics (min, max, null count)
-- `list_calculated_columns` - List calculated columns with expressions
+### Data Exploration (1 unified tool)
+- `list_objects` - Consolidated listing with 15 object types (now includes Shared M/Named Expressions)
+  - Easily discover tables, measures, columns, relationships, hierarchies, calculation groups, KPIs, cultures, perspectives, partitions, UDFs, roles, calendars, and shared M expressions.
 
-### Measure Management (4 tools)
-- `create_measure` - Create new DAX measures
-- `update_measure` - Modify existing measures
-- `delete_measure` - Remove measures
-- `create_measures_table` - Create dedicated measures table
+### Core Operations (3 tools)
+- `run_dax` - Execute DAX queries (up to 1000 rows)
+- `analyze_table` - Describe tables, preview data, get column statistics
+- `get_model_info` - Export schema or view data sources
 
-### Relationship Operations (4 tools)
-- `list_relationships` - List all relationships with properties
-- `create_relationship` - Create new relationships
-- `update_relationship` - Modify relationship properties
-- `delete_relationship` - Remove relationships
+### Search & Discovery (1 unified tool)
+- `search_model` — Find things in your model by name or by what their formulas contain.
+  - What you can search
+    - Names and descriptions: tables, columns, measures, calculated columns, relationships, hierarchies, calculation groups and items, perspectives, cultures
+    - DAX expressions: measures, calculated columns, calculation items, KPI status/target/trend, row‑level security filters, calculated tables
+    - Power Query (M): table partitions and shared M (named expressions)
+  - How it works
+    - Name search: find objects by name (supports wildcards `*` and `?`)
+    - Text search: find names or descriptions that contain your text
+    - DAX search: find DAX that contains your text (e.g., references, functions)
+    - M search: find Power Query steps or sources by text
+  - Lean defaults (token‑efficient)
+    - Default `mode="name"`
+    - Default `types=["tables","columns","measures","calculated_columns"]`
+    - In name mode, measure and calculated column expressions are omitted by default
+    - Results are limited to 50 items per type by default
+  - Flags to expand detail
+    - `includeExpressions: true` — include full expressions in name mode (token heavy)
+    - `previewChars: N` — include `expression_preview` up to N chars instead of full expression
+    - `limitPerType: N` — override the per-type cap (default 50)
+  - Try asking
+    - "Show relationships that involve the Date table"
+    - "Which calculation items use SELECTEDVALUE?"
+    - "Find KPIs that reference [Sales Amount]"
+    - "Search M for Sql.Database connections"
+    - "Do we have a perspective for executives?"
 
-### Search (2 tools)
-- `search_objects` - Find objects by name pattern
-- `search_string` - Full-text search in names and expressions
+### Measure Management (1 unified tool)
+- `manage_measure` - Create, update, delete measures with dynamic format strings
 
-### Advanced Analysis (2 tools)
-- `analyze_dax_query` - Query performance analysis
-- `get_vertipaq_stats` - VertiPaq storage statistics
+### Table Operations (1 unified tool)
+- `manage_table` - Create, update, delete tables with partition support
+  - Create tables using M (Power Query), SQL, DAX (calculated), or dataflow entities.
+  - You can point M partitions at a Shared M (Named Expression) to reuse logic across tables.
+  - After creation, the server reports whether it processed the table and surfaces any warnings (e.g., refresh issues) while still returning the new table details.
+
+### Relationship Operations (1 unified tool)
+- `manage_relationship` - Create, update, delete relationships with full control
+
+### Partition Management (1 unified tool)
+- `manage_partition` - Create, update, delete, refresh all partition types
+  - Works with M (Power Query), Query (SQL), Calculated (DAX), and Entity (Dataflow) partitions in Import/DirectQuery/Dual modes.
+  - M partitions can use a Shared M (Named Expression) instead of inlining the M text, so you maintain one source of truth.
+
+### Advanced Model Features (9 tools)
+- `manage_udf` - User-Defined Functions (create, update, delete with parameters)
+- `manage_named_expression` - Create, read, update, and delete Shared M (Named Expressions)
+  - Use these to centralize reusable M logic; partitions can reference them by name.
+- `manage_calc_group` - Calculation Groups (create calculation items dynamically)
+- `manage_hierarchy` - Hierarchies (create, update, delete with level management)
+- `manage_kpi` - Key Performance Indicators (target, status, trend expressions)
+- `manage_role` - Security Roles (row-level and object-level security)
+- `manage_perspective` - Perspectives (filter model objects by user groups)
+- `manage_culture` - Cultures (add languages/locales with annotations)
+- `manage_translation` - Translations (translate captions and descriptions)
+
+### Storage & Performance (2 tools)
+- `get_vertipaq_stats` - VertiPaq statistics (storage, encoding, cardinality)
+- `analyze_query_performance` - DAX query performance with detailed metrics
+
+### Refresh Operations (1 tool)
+- `refresh` - Refresh at partition, table, or model scope
 
 ## Example Use Cases
 
@@ -361,6 +460,60 @@ Explain when each might be problematic."
 - Calculate the retention percentage
 Create this measure with proper error handling and formatting."
 ```
+
+### 6. User-Defined Functions
+
+```
+"Create a UDF called 'RollingAverage' that takes a measure and period count
+and returns a rolling average. Include proper parameter descriptions for IntelliSense."
+```
+
+### 7. Multi-Language Model
+
+```
+"Add French and German translations to my model. Translate all table names,
+measure names, and key descriptions. Use the culture codes fr-FR and de-DE."
+```
+
+### 8. Security Implementation
+
+```
+"Set up row-level security for our Sales model. Create roles for:
+1. SalesManager - can see all regions
+2. RegionalRep - can only see their assigned region
+3. Finance - read-only access to sensitive columns
+
+Include the appropriate DAX filters."
+```
+
+### 9. Time Intelligence Setup
+
+```
+"Create a calendar table for 2025 with Year, Quarter, Month hierarchies.
+Then create time intelligence measures for:
+- YTD Sales
+- Prior Year Sales
+- Year-over-Year Growth"
+```
+
+### 10. Table Management
+
+```
+"Create a new calculated table that aggregates sales by customer and month,
+then set up a hierarchy with Customer > Month for analysis."
+```
+
+### 11. Shared M (Named Expressions) and M Partitions
+
+Ask Claude naturally, no parameters needed:
+```
+"Create a reusable shared M expression called SimpleData that returns a tiny table with one column 'Col1' and one row 'Val1'. Then create a new table DimSimple that uses this shared expression."
+```
+
+What you’ll see:
+- The shared expression is created
+- A new table is added that reuses it
+- A quick status telling you if the table processed, plus any warnings (e.g., refresh issues)
 
 ## Troubleshooting
 
@@ -465,7 +618,8 @@ Built with:
 
 ---
 
-**Version**: 1.3.0
+**Version**: 2.0.9
 **MCP Protocol**: 2025-06-18
-**Release Date**: October 2025
+**Release Date**: November 2025
 **Platform**: Windows 10/11
+**Versions**: Full (26 tools) and Read-Only (9 tools - view and analyze only)
