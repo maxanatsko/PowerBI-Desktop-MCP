@@ -47,28 +47,43 @@ Think of it as giving AI "eyes and hands" to work with your Power BI models, all
 
 ## Privacy & Data
 
-### No Data Collection or Tracking
+### MCP Server: Zero Data Collection
 
-**This MCP server does NOT collect, track, or store any data.**
+**IMPORTANT: This MCP server does NOT collect, track, or store ANY data.**
 
-- No telemetry is sent to external servers
-- No analytics or usage data is tracked
-- No personal or model data is logged
-- Your Power BI model data is never uploaded anywhere
+The Power BI Desktop MCP Server is a local bridge application that:
+- Runs entirely on your machine
+- Does NOT send telemetry to any external servers
+- Does NOT track analytics or usage data
+- Does NOT log your personal information or Power BI model data
+- Does NOT upload your data anywhere
 
 **Data Flow:**
-The ONLY data that passes through this MCP server flows between:
+The MCP server acts as a simple pass-through between two components on your local machine:
 1. **Your Power BI Desktop** → MCP Server (reads model structure, executes queries)
-2. **MCP Server** → **Your chosen AI assistant** (Claude Desktop, Claude Code, VS Code with GitHub Copilot, or other MCP-compatible tools)
+2. **MCP Server** → **Your AI Assistant** (sends responses back)
 
-All communication is local to your machine. The MCP server acts as a bridge between Power BI Desktop and your AI assistant - nothing more.
+That's it. Nothing is sent to the MCP server developer or any third-party service.
 
-**Your responsibility:**
-- Be aware of what data you ask the AI to access in your Power BI model
-- Remember that your chosen AI assistant may store conversations according to their privacy policies:
-  - Claude Desktop/Claude Code: Anthropic's privacy policy
-  - VS Code with GitHub Copilot: Microsoft/GitHub privacy policies
-- The MCP server itself does not retain any data between requests
+### AI Assistant Privacy: Not Our Responsibility
+
+**CRITICAL CLARIFICATION:**
+
+This MCP server is a separate piece of software from the AI assistants you use it with (Claude, GitHub Copilot, etc.). **The AI assistants have their own privacy policies and data practices that are completely independent from this MCP server.**
+
+When you use this MCP server with an AI assistant:
+- The AI assistant (Claude Desktop, Claude Code, VS Code with GitHub Copilot, etc.) may collect and store conversation data according to their own privacy policies
+- Review the privacy policy of your chosen AI assistant:
+  - **Claude Desktop/Claude Code**: [Anthropic's Privacy Policy](https://www.anthropic.com/legal/privacy)
+  - **VS Code with GitHub Copilot**: [Microsoft/GitHub Privacy Policies](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement)
+- **The MCP server developer is NOT responsible for how AI assistants handle your data**
+- Be mindful of what data from your Power BI models you ask the AI to analyze
+
+**Your Responsibility:**
+- Understand that AI assistants are third-party services with their own data practices
+- Review the privacy policies of the AI assistant you choose to use
+- Be careful about what sensitive or confidential data you expose to AI assistants
+- The MCP server itself does not retain any data between requests - but your AI assistant might
 
 ## Key Features
 
